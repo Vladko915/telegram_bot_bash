@@ -1,0 +1,39 @@
+//get telegram-bot updates
+curl -s https://api.telegram.org/botYOUR_TELEGRAM_TOKEN/getUpdates | jq
+
+OR 
+
+tbot_token='YOUR_TELEGRAM_TOKEN' && \
+t_api_url="https://api.telegram.org/bot$tbot_token" && \
+curl -s $t_api_url/getUpdates | jq
+
+------------------------------------------------------------------
+
+//send message, if the bot is connected to only one chat
+ 
+text="YOUR_MESSAGE_HERE" && \
+tbot_token="YOUR_TELEGRAM_TOKEN"  && \
+t_api_url="https://api.telegram.org/bot$tbot_token" && \
+chat_id=$(curl -s $t_api_url/getUpdates | jq '.result | .[] | .message.chat.id') && \
+curl -s -X POST "$t_api_url/sendMessage?chat_id=$chat_id&disable_notification=true&text=$text" | jq
+
+OR
+
+text="YOUR_MESSAGE_HERE" && \
+tbot_token="YOUR_TELEGRAM_TOKEN"  && \
+t_api_url="https://api.telegram.org/bot$tbot_token" && \
+chat_id=$(curl -s $t_api_url/getUpdates | jq '.result | .[] | .message.chat.id') && \
+t_api_url="$t_api_url/sendMessage"  && \
+curl -s -X POST $t_api_url -d chat_id=$chat_id -d text="$text"
+
+--------------------------------------------------------------------
+
+//send message, if the chat number is known
+
+text="YOUR_MESSAGE_HERE" && \
+tbot_token="YOUR_TELEGRAM_TOKEN"  && \
+chat_id="YOUR_CHAT_ID"  && \
+t_api_url="https://api.telegram.org/bot$tbot_token/sendMessage"  && \
+curl -s -X POST $t_api_url -d chat_id=$chat_id -d text="$text" | jq
+
+
