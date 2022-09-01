@@ -1,2 +1,0 @@
-# telegram_bot_bash
-56329891:GqNAfxuIR-Av8ti9F7BoKkUp30IB4cA0Y
