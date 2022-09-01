@@ -37,3 +37,20 @@ t_api_url="https://api.telegram.org/bot$tbot_token/sendMessage"  && \
 curl -s -X POST $t_api_url -d chat_id=$chat_id -d text="$text" | jq
 
 
+---------------------------------------------------------------------
+//Add to ~/.bashrc
+
+tbot()
+{
+text=$1 && \
+tbot_token="YOUR_TELEGRAM_TOKEN_HERE"  && \
+chat_id="YOUR_CHAT_ID_HERE"  && \
+t_api_url="https://api.telegram.org/bot$tbot_token/sendMessage"  && \
+curl -s -X POST $t_api_url -d chat_id=$chat_id -d text="$text" | jq
+}
+
+Example:
+> tbot "Hello my friend."
+
+
+
